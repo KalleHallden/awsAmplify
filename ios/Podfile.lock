@@ -7,11 +7,19 @@ PODS:
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_sound (9.11.2):
+    - Flutter
+    - flutter_sound_core (= 9.11.2)
+  - flutter_sound_core (9.11.2)
+  - mic_stream (0.0.1):
+    - Flutter
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - permission_handler_apple (9.3.0):
+    - Flutter
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -20,9 +28,16 @@ DEPENDENCIES:
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
+  - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
+  - mic_stream (from `.symlinks/plugins/mic_stream/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - flutter_sound_core
 
 EXTERNAL SOURCES:
   amplify_auth_cognito:
@@ -33,10 +48,16 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
+  flutter_sound:
+    :path: ".symlinks/plugins/flutter_sound/ios"
+  mic_stream:
+    :path: ".symlinks/plugins/mic_stream/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -45,10 +66,14 @@ SPEC CHECKSUMS:
   amplify_secure_storage: ede2a5027299bab196b8baa030ed3f4cf50ce9a9
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_sound: aa796ea2a7c3a243b4aa795f70572837bdf01cbe
+  flutter_sound_core: 88f0e9d775505f790a8d9d0aed784be47ad9b3c0
+  mic_stream: 28787bfcfcfc68e17fad15050baf5929f1d10901
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
-PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+PODFILE CHECKSUM: 758aa2f6b64258a1222087e761bf7b562ec2257f
 
 COCOAPODS: 1.15.2
