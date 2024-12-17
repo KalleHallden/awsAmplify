@@ -4,6 +4,9 @@ PODS:
     - FlutterMacOS
   - amplify_secure_storage (0.0.1):
     - Flutter
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -26,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/darwin`)
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
@@ -44,6 +48,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/amplify_auth_cognito/darwin"
   amplify_secure_storage:
     :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/darwin"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
@@ -64,6 +70,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   amplify_auth_cognito: b76a0e367489da2b9a3c6e5a8ec74a72a0a7cc2f
   amplify_secure_storage: ede2a5027299bab196b8baa030ed3f4cf50ce9a9
+  connectivity_plus: 18382e7311ba19efcaee94442b23b32507b20695
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_sound: aa796ea2a7c3a243b4aa795f70572837bdf01cbe
