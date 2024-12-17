@@ -2,6 +2,25 @@ PODS:
   - amplify_auth_cognito (0.0.1):
     - Flutter
     - FlutterMacOS
+  - amplify_datastore (0.0.1):
+    - amplify_datastore/Amplify (= 0.0.1)
+    - amplify_datastore/AWSDataStorePlugin (= 0.0.1)
+    - amplify_datastore/AWSPluginsCore (= 0.0.1)
+    - Flutter
+    - Starscream (= 4.0.4)
+  - amplify_datastore/Amplify (0.0.1):
+    - Flutter
+    - Starscream (= 4.0.4)
+  - amplify_datastore/AWSDataStorePlugin (0.0.1):
+    - amplify_datastore/Amplify
+    - amplify_datastore/AWSPluginsCore
+    - Flutter
+    - SQLite.swift (= 0.13.2)
+    - Starscream (= 4.0.4)
+  - amplify_datastore/AWSPluginsCore (0.0.1):
+    - amplify_datastore/Amplify
+    - Flutter
+    - Starscream (= 4.0.4)
   - amplify_secure_storage (0.0.1):
     - Flutter
   - connectivity_plus (0.0.1):
@@ -23,11 +42,16 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
+  - SQLite.swift (0.13.2):
+    - SQLite.swift/standard (= 0.13.2)
+  - SQLite.swift/standard (0.13.2)
+  - Starscream (4.0.4)
   - url_launcher_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/darwin`)
+  - amplify_datastore (from `.symlinks/plugins/amplify_datastore/ios`)
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
@@ -42,10 +66,14 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - flutter_sound_core
+    - SQLite.swift
+    - Starscream
 
 EXTERNAL SOURCES:
   amplify_auth_cognito:
     :path: ".symlinks/plugins/amplify_auth_cognito/darwin"
+  amplify_datastore:
+    :path: ".symlinks/plugins/amplify_datastore/ios"
   amplify_secure_storage:
     :path: ".symlinks/plugins/amplify_secure_storage/ios"
   connectivity_plus:
@@ -69,6 +97,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   amplify_auth_cognito: b76a0e367489da2b9a3c6e5a8ec74a72a0a7cc2f
+  amplify_datastore: 5dddbe5665799be73a315f9cd4735621fcbbe425
   amplify_secure_storage: ede2a5027299bab196b8baa030ed3f4cf50ce9a9
   connectivity_plus: 18382e7311ba19efcaee94442b23b32507b20695
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
@@ -79,6 +108,8 @@ SPEC CHECKSUMS:
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 758aa2f6b64258a1222087e761bf7b562ec2257f
