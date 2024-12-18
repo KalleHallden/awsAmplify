@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 	//	      fields: [
 	//		      SignUpFormField.phoneNumber(required: true)
 	//	      ], 
-
+// comment
 	//	      ),
       child: MaterialApp(
         builder: Authenticator.builder(),
