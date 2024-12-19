@@ -1,56 +1,40 @@
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_authenticator/amplify_authenticator.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:aws_amplify/ui_elements/signup_form.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'amplify_outputs.dart';
+import 'join_call_screen.dart';
+import 'services/signalling.service.dart';
 
-Future<void> main() async {
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    await _configureAmplify();
-    runApp(const MyApp());
-  } on AmplifyException catch (e) {
-    runApp(Text("Error configuring Amplify: ${e.message}"));
-  }
+void main() {
+  // start videoCall app
+  runApp(VideoCallApp());
 }
 
-Future<void> _configureAmplify() async {
-  try {
-    await Amplify.addPlugin(AmplifyAuthCognito());
-    await Amplify.configure(amplifyConfig);
-    safePrint('Successfully configured');
-  } on Exception catch (e) {
-    safePrint('Error configuring Amplify: $e');
-  }
-}
+class VideoCallApp extends StatelessWidget {
+  VideoCallApp({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // signalling server url
+  final String websocketUrl = "http://localhost:5000";
+
+  // generate callerID of local user
+  final String selfCallerID =
+      Random().nextInt(999999).toString().padLeft(6, '0');
+
   @override
   Widget build(BuildContext context) {
-    return Authenticator(
-	    //initialStep: AuthenticatorStep.signUp,
-	    //  signUpForm: SignUpForm.custom(
-	//	      fields: [
-	//		      SignUpFormField.phoneNumber(required: true)
-	//	      ], 
-// comment
-	//	      ),
-      child: MaterialApp(
-        builder: Authenticator.builder(),
-        home: const Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SignOutButton(),
-                Text('TODO Application'),
-              ],
-            ),
-          ),
-        ),
+    // init signalling service
+    SignallingService.instance.init(
+      websocketUrl: websocketUrl,
+      selfCallerID: selfCallerID,
+    );
+
+    // return material app
+    return MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        useMaterial3: true,
+        colorScheme: const ColorScheme.dark(),
       ),
+      themeMode: ThemeMode.dark,
+      home: JoinScreen(selfCallerId: selfCallerID),
     );
   }
 }

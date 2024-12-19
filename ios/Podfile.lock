@@ -33,6 +33,9 @@ PODS:
     - Flutter
     - flutter_sound_core (= 9.11.2)
   - flutter_sound_core (9.11.2)
+  - flutter_webrtc (0.11.3):
+    - Flutter
+    - WebRTC-SDK (= 125.6422.04)
   - mic_stream (0.0.1):
     - Flutter
   - package_info_plus (0.4.5):
@@ -48,6 +51,7 @@ PODS:
   - Starscream (4.0.4)
   - url_launcher_ios (0.0.1):
     - Flutter
+  - WebRTC-SDK (125.6422.04)
 
 DEPENDENCIES:
   - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/darwin`)
@@ -57,6 +61,7 @@ DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
+  - flutter_webrtc (from `.symlinks/plugins/flutter_webrtc/ios`)
   - mic_stream (from `.symlinks/plugins/mic_stream/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -68,6 +73,7 @@ SPEC REPOS:
     - flutter_sound_core
     - SQLite.swift
     - Starscream
+    - WebRTC-SDK
 
 EXTERNAL SOURCES:
   amplify_auth_cognito:
@@ -84,6 +90,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_sound:
     :path: ".symlinks/plugins/flutter_sound/ios"
+  flutter_webrtc:
+    :path: ".symlinks/plugins/flutter_webrtc/ios"
   mic_stream:
     :path: ".symlinks/plugins/mic_stream/ios"
   package_info_plus:
@@ -104,6 +112,7 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_sound: aa796ea2a7c3a243b4aa795f70572837bdf01cbe
   flutter_sound_core: 88f0e9d775505f790a8d9d0aed784be47ad9b3c0
+  flutter_webrtc: 75b868e4f9e817c7a9a42ca4b6169063de4eec9f
   mic_stream: 28787bfcfcfc68e17fad15050baf5929f1d10901
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
@@ -111,6 +120,7 @@ SPEC CHECKSUMS:
   SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
+  WebRTC-SDK: c3d69a87e7185fad3568f6f3cff7c9ac5890acf3
 
 PODFILE CHECKSUM: 758aa2f6b64258a1222087e761bf7b562ec2257f
 

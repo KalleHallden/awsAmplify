@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>We need access to your microphone to visualize audio</string>
+	<string>Hello there, we need access to that mic bro. Otherwise you can't talk to anyone. Now that's not what you want right?</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
