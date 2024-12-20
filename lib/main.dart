@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:aws_amplify/ui_elements/waveform_widget.dart';
 import 'package:flutter/material.dart';
 import 'join_call_screen.dart';
 import 'services/signalling.service.dart';
@@ -34,7 +35,8 @@ class VideoCallApp extends StatelessWidget {
         colorScheme: const ColorScheme.dark(),
       ),
       themeMode: ThemeMode.dark,
-      home: JoinScreen(selfCallerId: selfCallerID),
+      home: CircularAudioWaveform(), 
+      // home: JoinScreen(selfCallerId: selfCallerID),
     );
   }
 }
