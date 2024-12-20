@@ -1,3 +1,4 @@
+import 'package:aws_amplify/ui_elements/waveform_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import '../services/signalling.service.dart';
@@ -179,8 +180,11 @@ class _CallScreenState extends State<CallScreen> {
         child: Column(
           children: [
             Expanded(
-              child: Stack(children: [
-              ]),
+             child: Stack(children: [
+  		_rtcPeerConnection != null 
+      		? AudioAmplitude(peerConnection: _rtcPeerConnection!) 
+      		: Container(color: Colors.red, height: 100, width: 100,),
+		]), 
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),

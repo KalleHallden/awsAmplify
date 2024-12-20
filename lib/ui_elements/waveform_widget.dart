@@ -1,27 +1,62 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 
-class CircularAudioWaveform extends StatefulWidget {
+class AudioAmplitude extends StatefulWidget {
+  final RTCPeerConnection peerConnection; // Pass the RTCPeerConnection instance
+
+  const AudioAmplitude({Key? key, required this.peerConnection}) : super(key: key);
+
   @override
-  _CircularAudioWaveformState createState() => _CircularAudioWaveformState();
+  _AudioAmplitudeState createState() => _AudioAmplitudeState();
 }
 
-class _CircularAudioWaveformState extends State<CircularAudioWaveform>
-    with SingleTickerProviderStateMixin {
-  double _amplitude = 0.0; // Simulated amplitude value
+class _AudioAmplitudeState extends State<AudioAmplitude> {
+  double _amplitude = 0.0; // Smoothed audio level
   late Timer _timer;
+  double previousSize = 0.0;
 
   @override
   void initState() {
     super.initState();
+    _startAudioLevelMonitoring();
+  }
 
-    // Simulate audio amplitude changes
-    _timer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+  Future<void> _startAudioLevelMonitoring() async {
+    _timer = Timer.periodic(Duration(milliseconds: 100), (_) async {
+      double audioLevel = await _getAudioLevelFromWebRTC();
       setState(() {
-	      _amplitude = 0.9 * _amplitude + 0.1 * math.Random().nextDouble();
+        // Smooth the audio level for a better animation effect
+       // _amplitude = 0.9 * _amplitude + 0.1 * audioLevel;
+	      _amplitude = audioLevel;
       });
     });
+  }
+
+  Future<double> _getAudioLevelFromWebRTC() async {
+    try {
+      // Get all RTCRtpSenders from the peer connection
+      List<RTCRtpSender> senders = await widget.peerConnection.getSenders();
+
+      for (var sender in senders) {
+        if (sender.track?.kind == 'audio') {
+          // Get WebRTC stats for the audio track
+          List<StatsReport> stats = await sender.getStats();
+
+          for (var report in stats) {
+            if (report.type == 'media-source' || report.values.containsKey('audioLevel')) {
+              // Extract the audioLevel value (0.0 to 1.0)
+              return report.values['audioLevel'] as double? ?? 0.0;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      print("Error fetching audio level: $e");
+    }
+    print("no audio level");
+    return 0.0; // Return 0 if no audio level is found
   }
 
   @override
@@ -32,65 +67,55 @@ class _CircularAudioWaveformState extends State<CircularAudioWaveform>
 
   @override
   Widget build(BuildContext context) {
+	  final double maxSize = 200.0;
+	final double size = _amplitude * maxSize;
+	double smoothingFactor = 0.95;
+	final double smoothedSize = smoothingFactor * previousSize + (1-smoothingFactor) * size;
+	previousSize = smoothedSize;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: CustomPaint(
-          size: Size(200, 200),
-          painter: CircularWaveformPainter(_amplitude),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 20),
+            Stack(
+        alignment: Alignment.center,
+        children: [
+          // Glowing shadow effect
+          Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blue.withOpacity(0.3), // Shadow color
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.blue.withOpacity(0.5),
+                  blurRadius: 20,
+                  spreadRadius: 10,
+                ),
+              ],
+            ),
+          ),
+          // Main circle with border
+          Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.black, // Circle color
+              border: Border.all(
+                color: Colors.black, // Border color
+                width: 4.0, // Border width
+              ),
+            ),
+          ),
+        ], 
+	)],
         ),
       ),
     );
   }
-}
-
-class CircularWaveformPainter extends CustomPainter {
-  final double amplitude; // Current amplitude value (0.0 to 1.0)
-
-  CircularWaveformPainter(this.amplitude);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final baseRadius = 60.0;
-    final maxVariation = 20.0;
-    final segments = 100; // Number of segments for the circle
-
-    final paint = Paint()
-      ..color = Colors.blue
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
-
-    final path = Path();
-
-    for (int i = 0; i <= segments; i++) {
-      final angle = (2 * math.pi / segments) * i;
-      final variation = amplitude * maxVariation;
-      final currentRadius = baseRadius + variation;
-
-      final x = center.dx + currentRadius * math.cos(angle);
-      final y = center.dy + currentRadius * math.sin(angle);
-
-      if (i == 0) {
-        path.moveTo(x, y);
-      } else {
-        path.lineTo(x, y);
-      }
-    }
-
-    path.close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CircularWaveformPainter oldDelegate) {
-    return oldDelegate.amplitude != amplitude;
-  }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: CircularAudioWaveform(),
-  ));
 }
 
