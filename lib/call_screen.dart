@@ -1,3 +1,4 @@
+import 'package:aws_amplify/ui_elements/call_page.dart';
 import 'package:aws_amplify/ui_elements/waveform_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -172,7 +173,7 @@ class _CallScreenState extends State<CallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("P2P Call App"),
       ),
@@ -181,6 +182,7 @@ class _CallScreenState extends State<CallScreen> {
           children: [
             Expanded(
              child: Stack(children: [
+		     CallPage(),
   		_rtcPeerConnection != null 
       		? AudioAmplitude(peerConnection: _rtcPeerConnection!) 
       		: Container(color: Colors.red, height: 100, width: 100,),

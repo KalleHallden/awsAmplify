@@ -72,9 +72,7 @@ class _AudioAmplitudeState extends State<AudioAmplitude> {
 	double smoothingFactor = 0.95;
 	final double smoothedSize = smoothingFactor * previousSize + (1-smoothingFactor) * size;
 	previousSize = smoothedSize;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
+    return  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -88,10 +86,10 @@ class _AudioAmplitudeState extends State<AudioAmplitude> {
             height: size,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.blue.withOpacity(0.3), // Shadow color
+              //color: Colors.purple.withOpacity(0.3), // Shadow color
               boxShadow: [
                 BoxShadow(
-                  color: Colors.blue.withOpacity(0.5),
+                  color: Colors.purple.withOpacity(0.5),
                   blurRadius: 20,
                   spreadRadius: 10,
                 ),
@@ -104,18 +102,16 @@ class _AudioAmplitudeState extends State<AudioAmplitude> {
             height: size,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.black, // Circle color
+              color: Colors.transparent, // Circle color
               border: Border.all(
-                color: Colors.black, // Border color
-                width: 4.0, // Border width
+                color: Colors.purple, // Border color
+                width: 1, // Border width
               ),
             ),
           ),
         ], 
-	)],
-        ),
-      ),
-    );
+	)]),
+        );
   }
 }
 
