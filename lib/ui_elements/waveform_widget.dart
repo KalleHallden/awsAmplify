@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 class AudioAmplitude extends StatefulWidget {
-  final RTCPeerConnection peerConnection; // Pass the RTCPeerConnection instance
+  final RTCPeerConnection peerConnection;
 
   const AudioAmplitude({Key? key, required this.peerConnection}) : super(key: key);
 
@@ -15,7 +15,6 @@ class AudioAmplitude extends StatefulWidget {
 class _AudioAmplitudeState extends State<AudioAmplitude> {
   double _amplitude = 0.0; // Smoothed audio level
   late Timer _timer;
-  double previousSize = 0.0;
 
   @override
   void initState() {
@@ -28,25 +27,21 @@ class _AudioAmplitudeState extends State<AudioAmplitude> {
       double audioLevel = await _getAudioLevelFromWebRTC();
       setState(() {
         // Smooth the audio level for a better animation effect
-       // _amplitude = 0.9 * _amplitude + 0.1 * audioLevel;
-	      _amplitude = audioLevel;
+        _amplitude = 0.5 * _amplitude + 0.5 * audioLevel;
       });
     });
   }
 
   Future<double> _getAudioLevelFromWebRTC() async {
     try {
-      // Get all RTCRtpSenders from the peer connection
       List<RTCRtpSender> senders = await widget.peerConnection.getSenders();
 
       for (var sender in senders) {
         if (sender.track?.kind == 'audio') {
-          // Get WebRTC stats for the audio track
           List<StatsReport> stats = await sender.getStats();
 
           for (var report in stats) {
             if (report.type == 'media-source' || report.values.containsKey('audioLevel')) {
-              // Extract the audioLevel value (0.0 to 1.0)
               return report.values['audioLevel'] as double? ?? 0.0;
             }
           }
@@ -55,7 +50,6 @@ class _AudioAmplitudeState extends State<AudioAmplitude> {
     } catch (e) {
       print("Error fetching audio level: $e");
     }
-    print("no audio level");
     return 0.0; // Return 0 if no audio level is found
   }
 
@@ -67,51 +61,49 @@ class _AudioAmplitudeState extends State<AudioAmplitude> {
 
   @override
   Widget build(BuildContext context) {
-	  final double maxSize = 200.0;
-	final double size = _amplitude * maxSize;
-	double smoothingFactor = 0.95;
-	final double smoothedSize = smoothingFactor * previousSize + (1-smoothingFactor) * size;
-	previousSize = smoothedSize;
-    return  Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 20),
-            Stack(
-        alignment: Alignment.center,
-        children: [
-          // Glowing shadow effect
-          Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              //color: Colors.purple.withOpacity(0.3), // Shadow color
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.purple.withOpacity(0.5),
-                  blurRadius: 20,
-                  spreadRadius: 10,
-                ),
-              ],
-            ),
-          ),
-          // Main circle with border
-          Container(
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.transparent, // Circle color
-              border: Border.all(
-                color: Colors.purple, // Border color
-                width: 1, // Border width
-              ),
-            ),
-          ),
-        ], 
-	)]),
-        );
+    return Center(
+      child: CustomPaint(
+        size: Size(100, 300), // Width and height of the waveform canvas
+        painter: WaveformPainter(_amplitude),
+      ),
+    );
+  }
+}
+
+class WaveformPainter extends CustomPainter {
+  final double amplitude;
+
+  WaveformPainter(this.amplitude);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.purple
+      ..strokeWidth = 4
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    final centerY = size.height / 2;
+    final maxAmplitude = size.height / 2;
+
+    // Draw the waveform as a series of lines
+    final path = Path();
+    final numberOfPoints = 10; // Number of vertical lines in the waveform
+
+    for (int i = 0; i < numberOfPoints; i++) {
+      final x = size.width * (i / (numberOfPoints - 1));
+      final fluctuation = math.sin(i + amplitude * math.pi * 2) * amplitude * maxAmplitude;
+
+      path.moveTo(x, centerY - fluctuation);
+      path.lineTo(x, centerY + fluctuation);
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant WaveformPainter oldDelegate) {
+    return oldDelegate.amplitude != amplitude;
   }
 }
 
