@@ -53,6 +53,10 @@ PODS:
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_sound (9.11.2):
+    - Flutter
+    - flutter_sound_core (= 9.11.2)
+  - flutter_sound_core (9.11.2)
   - iris_method_channel (0.0.1):
     - Flutter
   - package_info_plus (0.4.5):
@@ -71,6 +75,7 @@ DEPENDENCIES:
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
+  - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - iris_method_channel (from `.symlinks/plugins/iris_method_channel/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -82,6 +87,7 @@ SPEC REPOS:
     - AgoraInfra_iOS
     - AgoraIrisRTC_iOS
     - AgoraRtcEngine_iOS
+    - flutter_sound_core
 
 EXTERNAL SOURCES:
   agora_rtc_engine:
@@ -94,6 +100,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
+  flutter_sound:
+    :path: ".symlinks/plugins/flutter_sound/ios"
   iris_method_channel:
     :path: ".symlinks/plugins/iris_method_channel/ios"
   package_info_plus:
@@ -114,6 +122,8 @@ SPEC CHECKSUMS:
   amplify_secure_storage: ede2a5027299bab196b8baa030ed3f4cf50ce9a9
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_sound: aa796ea2a7c3a243b4aa795f70572837bdf01cbe
+  flutter_sound_core: 88f0e9d775505f790a8d9d0aed784be47ad9b3c0
   iris_method_channel: 0617c689164d8154c020c50f63ca79f92b8a7b9d
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46

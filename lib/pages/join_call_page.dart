@@ -73,6 +73,7 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
 
     await _engine.enableAudio();
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    await _engine.setChannelProfile(ChannelProfileType.channelProfileCommunication);
     await _engine.setAudioProfile(
       profile: AudioProfileType.audioProfileDefault,
       scenario: AudioScenarioType.audioScenarioGameStreaming,
@@ -88,7 +89,7 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
       channelId: channelId,
       uid: uid,  // Replace with your actual user ID
       options: ChannelMediaOptions(
-        channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+        channelProfile: ChannelProfileType.channelProfileCommunication,
         clientRoleType: ClientRoleType.clientRoleBroadcaster,
       ),
     );

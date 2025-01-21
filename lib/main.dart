@@ -4,6 +4,8 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'amplify_outputs.dart';
 import 'package:call_app/pages/join_call_page.dart';
+import 'package:call_app/pages/waveform.dart';
+
 
 Future<void> main() async {
   try {
@@ -32,14 +34,14 @@ class MyApp extends StatelessWidget {
     return Authenticator(
       child: MaterialApp(
         builder: Authenticator.builder(),
-        home: const Scaffold(
+        home:  Scaffold(
           body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+		    mainAxisAlignment: MainAxisAlignment.center,
               children: [
-		      JoinChannelAudio(),
+		JoinChannelAudio(),
+		WaveFormWidget(),
                 SignOutButton(),
-                Text('TODO Application'),
               ],
             ),
           ),
