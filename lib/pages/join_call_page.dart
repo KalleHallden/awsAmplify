@@ -7,7 +7,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:io' as io;
 
 class JoinChannelAudio extends StatefulWidget {
-  const JoinChannelAudio({Key? key}) : super(key: key);
+	final String channelID;
+  const JoinChannelAudio({Key? key, required this.channelID}) : super(key: key);
 
   @override
   _JoinChannelAudioState createState() => _JoinChannelAudioState();
@@ -15,7 +16,7 @@ class JoinChannelAudio extends StatefulWidget {
 
 class _JoinChannelAudioState extends State<JoinChannelAudio> {
   late final RtcEngine _engine;
-  String channelID= channelId;  // Replace with your actual channel ID
+  late String channelID; // Replace with your actual channel ID
   bool isJoined = false;
   late RtcEngineEventHandler _rtcEngineEventHandler;
   late double volume; 
@@ -25,6 +26,7 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
   @override
   void initState() {
 	  volume = 0.0;
+	  channelID = widget.channelID;
     super.initState();
     _initEngine();
   }
@@ -93,6 +95,7 @@ onAudioVolumeIndication: (RtcConnection connection, List<AudioVolumeInfo> volume
       profile: AudioProfileType.audioProfileDefault,
       scenario: AudioScenarioType.audioScenarioGameStreaming,
     );
+	await _joinChannel();
   }
 
 double _maxVolumeSeen = 1.0;
@@ -169,11 +172,7 @@ double _maxVolumeSeen = 1.0;
           painter: WaveformWidget(volume),
         ),
       ),	
-	              ElevatedButton(
-              onPressed: isJoined ? _leaveChannel : _joinChannel,
-              child: Text(isJoined ? 'Leave Channel' : 'Join Channel'),
-            ),
-          ],
+      ],
     );
   }
 }

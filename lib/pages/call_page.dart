@@ -1,3 +1,4 @@
+import 'package:call_app/pages/join_call_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
@@ -34,14 +35,14 @@ class _CallPageState extends State<CallPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
+          // 1. Background Image
           Positioned.fill(
             child: Image.asset(
               'assets/profile_pic.jpg', // Replace with your image asset path
               fit: BoxFit.cover,
             ),
           ),
-          // Blur Effect
+          // 2. Blur Effect
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
@@ -50,7 +51,12 @@ class _CallPageState extends State<CallPage> {
               ),
             ),
           ),
-          // Top-left Corner Text
+          // 3. Center "HELLO" Text
+          Align(
+            alignment: Alignment.center,
+	    child: JoinChannelAudio(channelID: "test"),
+          ),
+          // 4. Top-left Corner Text
           Positioned(
             top: 40, // Adjust for padding
             left: 20,
@@ -63,7 +69,24 @@ class _CallPageState extends State<CallPage> {
               ),
             ),
           ),
-          // Bottom Center Card
+	  Positioned(
+            top: 40, // Adjust for padding
+            right: 20,
+            child: ElevatedButton(
+              child: Text("Leave", style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+	      style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.red), // Background color
+    ),
+	      onPressed: () {
+		      Navigator.pop(context);
+	      }),
+          ),
+          // 5. Bottom Center Card
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -92,7 +115,7 @@ class _CallPageState extends State<CallPage> {
                         children: [
                           // Left Arrow
                           IconButton(
-                            icon: Icon(Icons.arrow_left),
+                            icon: Icon(Icons.arrow_left), // Ensure this icon exists
                             onPressed: _previousOption,
                           ),
                           // Center Text
@@ -108,7 +131,7 @@ class _CallPageState extends State<CallPage> {
                           ),
                           // Right Arrow
                           IconButton(
-                            icon: Icon(Icons.arrow_right),
+                            icon: Icon(Icons.arrow_right), // Ensure this icon exists
                             onPressed: _nextOption,
                           ),
                         ],
