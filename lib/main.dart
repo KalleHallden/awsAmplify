@@ -39,8 +39,14 @@ class MyApp extends StatelessWidget {
             child: Column(
 		    mainAxisAlignment: MainAxisAlignment.center,
               children: [
-		JoinChannelAudio(),
-		WaveFormWidget(),
+		      ElevatedButton(onPressed: () {
+			Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyApp(),
+                      ),
+                    );
+		      }, child: Text("Call")),
                 SignOutButton(),
               ],
             ),

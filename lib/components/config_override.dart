@@ -38,7 +38,7 @@ class ExampleConfigOverride {
   String getToken() {
     return _overridedConfig[keyToken] ??
         // Allow pass a `channelId` as an environment variable with name `TEST_CHANNEL_ID` by using --dart-define
-        const String.fromEnvironment(keyToken, defaultValue: '007eJxTYAhstF0crsmQee7O+7JO93SHjzrnLp9JXaN0tXVD/mVFwdsKDIZJSQYGhgaWKRaWpiYpiUlJhkaGBsnJKSamZkZJSaZpu6r60xsCGRmuOjcyMEIhiM/CUJJaXMLAAAB6OCB7');
+        const String.fromEnvironment(keyToken, defaultValue: '007eJxTYLjfKt5ntLvzdKpE3vEP/L+Wr4/5Z790ydesrvurQs4usFVWYDBMSjIwMDSwTLGwNDVJSUxKMjQyNEhOTjExNTNKSjJNU46ZnN4QyMjwKEGHhZEBAkF8FoaS1OISBgYA6kkhLA==');
   }
 
   /// Override the config(appId/channelId/token)

@@ -1,6 +1,7 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:call_app/components/log_sink.dart';
 import 'package:call_app/config/agora.config.dart';
+import 'package:call_app/pages/waveform.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io' as io;
@@ -17,9 +18,13 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
   String channelID= channelId;  // Replace with your actual channel ID
   bool isJoined = false;
   late RtcEngineEventHandler _rtcEngineEventHandler;
+  late double volume; 
+  List<AudioVolumeInfo> volumeInfo = [];
+  bool shouldUpdate = true;
 
   @override
   void initState() {
+	  volume = 0.0;
     super.initState();
     _initEngine();
   }
@@ -67,9 +72,19 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
       onAudioRoutingChanged: (routing) {
         logSink.log('[onAudioRoutingChanged] routing: $routing');
       },
+      
+onAudioVolumeIndication: (RtcConnection connection, List<AudioVolumeInfo> volumeInfos, int speakerId, int elapsed) {
+  for (var volumeInfo in volumeInfos) {
+    volume += volumeInfo.volume!; // Sum the volumes of all speakers
+  }
+
+    _updateWaveform(volume / 10); // Update the waveform based on volume
+},
+      
     );
 
     _engine.registerEventHandler(_rtcEngineEventHandler);
+    await _engine.enableAudioVolumeIndication(interval: 200, smooth: 3, reportVad: true);
 
     await _engine.enableAudio();
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
@@ -78,6 +93,21 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
       profile: AudioProfileType.audioProfileDefault,
       scenario: AudioScenarioType.audioScenarioGameStreaming,
     );
+  }
+
+double _maxVolumeSeen = 1.0;
+ void _updateWaveform(double newVolume) {
+	 if (newVolume > _maxVolumeSeen) {
+      _maxVolumeSeen = newVolume;
+    }
+	    if (shouldUpdate) {
+		    shouldUpdate = !shouldUpdate;
+
+    setState(() {
+	    if (_maxVolumeSeen == 0) volume = 0; // avoid divide by zero
+    volume = (newVolume / _maxVolumeSeen).clamp(0.0, 1.0);
+    });
+	    }
   }
 
   Future<void> _joinChannel() async {
@@ -112,9 +142,38 @@ class _JoinChannelAudioState extends State<JoinChannelAudio> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: isJoined ? _leaveChannel : _joinChannel,
-      child: Text(isJoined ? 'Leave Channel' : 'Join Channel'),
+	  shouldUpdate = true;
+	  return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+              // Replace with your waveform widget
+	  Container(
+        // Make it a circle, so width == height
+        width: 200,
+        height: 200,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          // Drop shadow
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 8.0,
+              offset: Offset(2, 4), // Position of the shadow
+            ),
+          ],
+        ),
+        // Use a CustomPaint child to draw your waveform
+        child: CustomPaint(
+          // painter will fill the *available* space, which is our 200×200 circle
+          painter: WaveformWidget(volume),
+        ),
+      ),	
+	              ElevatedButton(
+              onPressed: isJoined ? _leaveChannel : _joinChannel,
+              child: Text(isJoined ? 'Leave Channel' : 'Join Channel'),
+            ),
+          ],
     );
   }
 }
