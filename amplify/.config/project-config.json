@@ -1,7 +1,5 @@
 {
-  "providers": [
-    "awscloudformation"
-  ],
+  "whyContinueWithGen1": "Prefer not to answer",
   "projectName": "callapp",
   "version": "3.1",
   "frontend": "flutter",
@@ -9,5 +7,8 @@
     "config": {
       "ResDir": "./lib/"
     }
-  }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
 }
