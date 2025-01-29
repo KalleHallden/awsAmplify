@@ -1,50 +1,15 @@
 {
-  "master": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-callapp-master-271cd-authRole",
-      "UnauthRoleArn": "arn:aws:iam::221082173109:role/amplify-callapp-master-271cd-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::221082173109:role/amplify-callapp-master-271cd-authRole",
-      "Region": "eu-north-1",
-      "DeploymentBucketName": "amplify-callapp-master-271cd-deployment",
-      "UnauthRoleName": "amplify-callapp-master-271cd-unauthRole",
-      "StackName": "amplify-callapp-master-271cd",
-      "StackId": "arn:aws:cloudformation:eu-north-1:221082173109:stack/amplify-callapp-master-271cd/d66c3e30-de51-11ef-bede-0e15484c6dff",
-      "AmplifyAppId": "d374105irosd49"
-    },
-    "categories": {
-      "auth": {
-        "callapp9c835c15": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d374105irosd49",
-          "type": "manual"
-        }
-      }
-    }
-  },
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-callapp-dev-7b8c1-authRole",
-      "UnauthRoleArn": "arn:aws:iam::221082173109:role/amplify-callapp-dev-7b8c1-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::221082173109:role/amplify-callapp-dev-7b8c1-authRole",
+      "AuthRoleName": "amplify-awsamplify-dev-f0276-authRole",
+      "UnauthRoleArn": "arn:aws:iam::221082173109:role/amplify-awsamplify-dev-f0276-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::221082173109:role/amplify-awsamplify-dev-f0276-authRole",
       "Region": "eu-north-1",
-      "DeploymentBucketName": "amplify-callapp-dev-7b8c1-deployment",
-      "UnauthRoleName": "amplify-callapp-dev-7b8c1-unauthRole",
-      "StackName": "amplify-callapp-dev-7b8c1",
-      "StackId": "arn:aws:cloudformation:eu-north-1:221082173109:stack/amplify-callapp-dev-7b8c1/ebb7e400-de4d-11ef-ad66-067bc2620e3b",
-      "AmplifyAppId": "d374105irosd49"
-    },
-    "categories": {
-      "auth": {
-        "callapp9c835c15": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d374105irosd49",
-          "type": "manual"
-        }
-      }
+      "DeploymentBucketName": "amplify-awsamplify-dev-f0276-deployment",
+      "UnauthRoleName": "amplify-awsamplify-dev-f0276-unauthRole",
+      "StackName": "amplify-awsamplify-dev-f0276",
+      "StackId": "arn:aws:cloudformation:eu-north-1:221082173109:stack/amplify-awsamplify-dev-f0276/0b9403c0-de59-11ef-b645-0657eeab5e0d",
+      "AmplifyAppId": "d1mzm9j693zx7m"
     }
   }
 }
